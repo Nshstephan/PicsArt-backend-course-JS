@@ -1,1 +1,0 @@
-# PicsArt-backend-course-JS
