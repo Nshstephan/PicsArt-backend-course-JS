@@ -1,4 +1,4 @@
-function promisify(callBack) {
+function promisify (callBack) {
     return (...args) => {
         return new Promise((resolve, reject) => {
             callBack(...args, (err, data) => {
