@@ -1,8 +1,8 @@
 function* fibonacci() {
-    let [prev, curr] = [0, 1];
+    let [previous, current] = [0, 1];
     while (true) {
-        [prev, curr] = [curr, prev + curr];
-        yield curr;
+        [previous, current] = [current, previous + current];
+        yield current;
     }
 }
 
