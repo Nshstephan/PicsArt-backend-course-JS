@@ -18,7 +18,7 @@ function config() {
             }
         }
     } catch (err) {
-        throw new Error("Something wen wrong.");
+        throw new Error("Something went wrong.");
     }
 }
 
