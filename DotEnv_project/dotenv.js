@@ -14,12 +14,13 @@ function config() {
                 value = splitted[1];
             }
             if (!key.startsWith("#") && key !== '') {
-                process.env[key] = value;
+                if(value === undefined) continue;
+                process.env[key] = value.replace(/['"]/g, '');
             }
         }
     } catch (err) {
-        throw new Error("Something went wrong.");
+        throw new Error("File not found.");
     }
 }
 
-exports.config = config;
+module.exports = {config: config};
