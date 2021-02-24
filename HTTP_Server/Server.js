@@ -5,6 +5,7 @@ const User = require('./User');
 const base = '/api/v1/users';
 const fr = new FileRepository();
 
+
 function getQueryParam(url, param_name) {
     let search = URL.parse(url).search;
     if (search) {
@@ -21,16 +22,21 @@ http.createServer(((req, res) => {
         let first = getQueryParam(req.url, 'name');
         let last = getQueryParam(req.url, 'lastName');
         let user = fr.getByFullName(first, last);
-        if (user)
+        if (user) {
             res.end(JSON.stringify(user));
-        res.end(`User not found. `)
+        } else {
+            res.end(`User not found. `);
+        }
+
 
     } else if (req.method === 'GET' && req.url.startsWith(base + '/')) {
         let id = req.url.split('/').slice(-1).pop();
         let user = fr.getById(id);
-        if (user)
+        if (user) {
             res.end(JSON.stringify(user));
-        res.end(`There is no user with ID: ${id}`)
+        } else {
+            res.end(`There is no user with ID: ${id}`);
+        }
 
 
     } else if (req.method === 'POST' && req.url === base + '/add') {
@@ -45,9 +51,11 @@ http.createServer(((req, res) => {
         req.on('data', (body) => {
             let data = JSON.parse(body);
             const success = fr.updateUser(data.ID, data.firstName, data.lastName, data.email, data.password);
-            if (success)
+            if (success) {
                 res.end('Successfully updated');
-            res.end(`There is no user with ID: ${data.ID}`);
+            } else {
+                res.end(`There is no user with ID: ${data.ID}`);
+            }
         });
 
     } else if (req.method === 'DELETE' && req.url.startsWith('/api/v1/users/delete')) {
