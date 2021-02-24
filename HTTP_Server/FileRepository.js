@@ -1,4 +1,5 @@
 const fs = require('fs');
+const chalk = require('chalk');
 const User = require('./User');
 
 class FileRepository {
@@ -16,7 +17,7 @@ class FileRepository {
         const dataJSON = JSON.stringify(array);
         fs.writeFileSync(this.path, dataJSON);
         if (boolean)
-            console.log("User added successfully");
+            console.log(chalk.green.inverse("User added successfully."));
     }
 
     getData() {
@@ -35,7 +36,7 @@ class FileRepository {
             if (x.ID === id)
                 return x;
         }
-        console.log('User not found.');
+        console.log(chalk.red.inverse('User not found.'));
         return null;
     }
 
@@ -45,7 +46,7 @@ class FileRepository {
             if (x.firstName === first || x.lastName === last)
                 return x;
         }
-        console.log('User not found.');
+        console.log(chalk.red.inverse('User not found.'));
         return null;
     }
 
@@ -63,8 +64,8 @@ class FileRepository {
         }
         this.saveData(users, false);
         if(!deleted)
-            console.log(`There is no user with ID: ${id}`);
-        console.log('User deleted successfully');
+            console.log(chalk.red.inverse(`There is no user with ID: ${id}`));
+        console.log(chalk.green.inverse('User deleted successfully.'));
     }
 
     updateUser(ID, firstName, lastName, email, password) {
@@ -86,10 +87,10 @@ class FileRepository {
         }
         this.saveData(users, false);
         if (!found) {
-            console.log(`There is no user with ID: ${ID}`);
+            console.log(chalk.red.inverse(`There is no user with ID: ${ID}`));
             return false;
         }
-        console.log('User updated successfully');
+        console.log(chalk.green.inverse('User updated successfully.'));
         return true;
     }
 }
