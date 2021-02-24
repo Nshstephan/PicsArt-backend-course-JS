@@ -35,46 +35,64 @@ class FileRepository {
             if (x.ID === id)
                 return x;
         }
-        return 'User not found.';
+        console.log('User not found.');
+        return null;
     }
 
-    getByName(name) {
+    getByFullName(first, last) {
         const data = this.getData();
         for (const x of data) {
-            if (x.firstName === name)
+            if (x.firstName === first || x.lastName === last)
                 return x;
         }
-        return 'User not found.';
+        console.log('User not found.');
+        return null;
     }
 
     removeById(id) {
+        let deleted = false;
         const users = this.getData();
         let i = 0;
         for (const x of users) {
             if (x.ID === id) {
                 users.splice(i, 1);
+                deleted = true;
                 break;
             }
             ++i;
         }
         this.saveData(users, false);
+        if(!deleted)
+            console.log(`There is no user with ID: ${id}`);
+        console.log('User deleted successfully');
     }
 
-    updateUser(id, firstName, lastName, email, password) {
-        let i = 0;
-        const users = this.getData();
-        for (const x of users) {
-            if (x.ID === id) {
-                let newUser = new User(firstName, lastName, email, password);
-                newUser.setId(id);
-                users.splice(i, 1, newUser);
+    updateUser(ID, firstName, lastName, email, password) {
+        let found = false;
+        let users = this.getData();
+        for (let x of users) {
+            if (x.ID === ID) {
+                if (firstName)
+                    x.firstName = firstName;
+                if (lastName)
+                    x.lastName = lastName;
+                if (email)
+                    x.email = email;
+                if (password)
+                    x.password = password;
+                found = true;
                 break;
             }
-            ++i;
         }
         this.saveData(users, false);
-        console.log('User updated successfully')
+        if (!found) {
+            console.log(`There is no user with ID: ${ID}`);
+            return false;
+        }
+        console.log('User updated successfully');
+        return true;
     }
 }
+
 
 module.exports = FileRepository;

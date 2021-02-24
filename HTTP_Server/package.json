@@ -1,0 +1,16 @@
+{
+  "name": "HTTP_Server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "FileRepository.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "shortid": "^2.2.16"
+  }
+}
