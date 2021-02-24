@@ -1,20 +1,9 @@
 [
   {
-    "firstName": "Vahe",
-    "ID": 1
-  },
-  {
     "firstName": "Stepan",
-    "lastName": "Nshanyan",
-    "email": "one@gmail.com",
-    "ID": 2
-  },
-  {
-    "firstName": "Vahik",
-    "ID": 1
-  },
-  {
-    "firstName": "Nare",
-    "ID": 2
+    "lastName": "Nshanayn",
+    "email": "nshstephan@gmail.com",
+    "password": 7857,
+    "ID": "H_vUXIjNa"
   }
 ]
