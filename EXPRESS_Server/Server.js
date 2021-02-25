@@ -54,5 +54,5 @@ app.delete(`${base}/delete/:id`, (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Server is listening at http://localhost:${port}`);
 });
