@@ -39,9 +39,9 @@ app.post(`${base}/`, (req, res) => {
     res.status(200).send('Successfully added');
 });
 
-app.put(`${base}/`, (req, res) => {
+app.put(`${base}/:id`, (req, res) => {
     let data = req.body;
-    const success = fr.updateUser(data.ID, data.firstName, data.lastName, data.email, data.password);
+    const success = fr.updateUser(req.params.id, data.firstName, data.lastName, data.email, data.password);
     if (success) {
         res.status(200).send('Successfully updated');
     } else {
