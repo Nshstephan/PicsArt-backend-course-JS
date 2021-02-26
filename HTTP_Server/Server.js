@@ -50,13 +50,17 @@ http.createServer(((req, res) => {
             let data = JSON.parse(body);
             const success = fr.updateUser(data.ID, data.firstName, data.lastName, data.email, data.password);
             if (success) {
-                res.end('Successfully updated');
+                res.setHeader('Content-Type', 'application/json');
+                res.statusCode = 200;
+                res.end(JSON.stringify({
+                    status: 'Successfully updated'
+                }));
             } else {
                 res.end(`There is no user with ID: ${data.ID}`);
             }
         });
 
-    } else if (req.method === 'DELETE' && req.url===base) {
+    } else if (req.method === 'DELETE' && req.url === base) {
         let id = req.url.split('/').slice(-1).pop();
         fr.removeById(id);
         res.end('Successfully deleted');
