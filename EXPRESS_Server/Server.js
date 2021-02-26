@@ -4,7 +4,7 @@ const app = express();
 const User = require('./User');
 const base = '/api/v1/users';
 const fr = new FileRepository();
-const port = 3000;
+const port = process.env.port || 3000;
 app.use(express.json());
 
 
@@ -55,5 +55,5 @@ app.delete(`${base}/:id`, (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Server is listening at http://localhost:${port}`);
 });
