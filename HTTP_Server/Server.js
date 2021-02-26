@@ -4,7 +4,7 @@ const FileRepository = require('./FileRepository');
 const User = require('./User');
 const base = '/api/v1/users';
 const fr = new FileRepository();
-
+const port = process.env.port || 3001;
 
 function getQueryParam(url, param_name) {
     let search = URL.parse(url).search;
@@ -27,7 +27,6 @@ http.createServer(((req, res) => {
         } else {
             res.end(`User not found. `);
         }
-
 
     } else if (req.method === 'GET' && req.url.startsWith(base + '/')) {
         let id = req.url.split('/').slice(-1).pop();
@@ -69,6 +68,6 @@ http.createServer(((req, res) => {
         res.end('Page not found')
     }
 
-})).listen(8080, () => {
-    console.log('Server is up and running...');
+})).listen(port, () => {
+    console.log(`Server is listening at http://localhost:${port}`);
 });
