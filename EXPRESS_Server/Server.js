@@ -7,18 +7,19 @@ const fr = new FileRepository();
 const port = 3000;
 app.use(express.json());
 
-app.get(`${base}/all`, (req, res) => {
-    res.status(200).send(JSON.stringify(fr.getData()));
-});
 
-app.get(base, (req, res) => {
-    let first = req.query.name;
-    let last = req.query.lastName;
-    let user = fr.getByFullName(first, last);
-    if (user) {
-        res.status(200).send(JSON.stringify(user));
+app.get(`${base}/`, (req, res) => {
+    if (req.url === `${base}/`) {
+        res.status(200).send(JSON.stringify(fr.getData()));
     } else {
-        res.status(400).send(`User not found. `);
+        let first = req.query.name;
+        let last = req.query.lastName;
+        let user = fr.getByFullName(first, last);
+        if (user) {
+            res.status(200).send(JSON.stringify(user));
+        } else {
+            res.status(400).send(`User not found. `);
+        }
     }
 });
 
@@ -31,14 +32,14 @@ app.get(`${base}/:id`, (req, res) => {
     }
 });
 
-app.post(`${base}/add`, (req, res) => {
+app.post(`${base}/`, (req, res) => {
     let data = req.body;
     let user = new User(data.firstName, data.lastName, data.email, data.password);
     fr.create(user);
     res.status(200).send('Successfully added');
 });
 
-app.put(`${base}/update`, (req, res) => {
+app.put(`${base}/`, (req, res) => {
     let data = req.body;
     const success = fr.updateUser(data.ID, data.firstName, data.lastName, data.email, data.password);
     if (success) {
@@ -48,11 +49,11 @@ app.put(`${base}/update`, (req, res) => {
     }
 });
 
-app.delete(`${base}/delete/:id`, (req, res) => {
+app.delete(`${base}/:id`, (req, res) => {
     fr.removeById(req.params.id);
     res.status(200).send('Successfully deleted');
 })
 
 app.listen(port, () => {
-    console.log(`Server is listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
 });
