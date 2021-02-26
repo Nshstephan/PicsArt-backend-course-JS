@@ -45,10 +45,11 @@ http.createServer(((req, res) => {
             res.end('Successfully added');
         });
 
-    } else if (req.method === 'PUT' && req.url === base) {
+    } else if (req.method === 'PUT' && req.url.startsWith(base + '/')) {
+        let id = req.url.split('/').slice(-1).pop();
         req.on('data', (body) => {
             let data = JSON.parse(body);
-            const success = fr.updateUser(data.ID, data.firstName, data.lastName, data.email, data.password);
+            const success = fr.updateUser(id, data.firstName, data.lastName, data.email, data.password);
             if (success) {
                 res.setHeader('Content-Type', 'application/json');
                 res.statusCode = 200;
