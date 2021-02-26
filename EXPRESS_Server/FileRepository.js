@@ -41,13 +41,19 @@ class FileRepository {
     }
 
     getByFullName(first, last) {
+        let output = [];
         const data = this.getData();
         for (const x of data) {
-            if (x.firstName === first || x.lastName === last)
-                return x;
+            if (x.firstName === first || x.lastName === last) {
+                output.push(x)
+            }
         }
-        console.log(chalk.red.inverse('User not found.'));
-        return null;
+        if (output.length !== 0) {
+            return output;
+        } else {
+            console.log(chalk.red.inverse('User not found.'));
+            return null;
+        }
     }
 
     removeById(id) {
@@ -63,7 +69,7 @@ class FileRepository {
             ++i;
         }
         this.saveData(users, false);
-        if(!deleted)
+        if (!deleted)
             console.log(chalk.red.inverse(`There is no user with ID: ${id}`));
         console.log(chalk.green.inverse('User deleted successfully.'));
     }
@@ -94,6 +100,5 @@ class FileRepository {
         return true;
     }
 }
-
 
 module.exports = FileRepository;
