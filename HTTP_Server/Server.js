@@ -37,9 +37,7 @@ http.createServer(((req, res) => {
         } else {
             res.end(`There is no user with ID: ${id}`);
         }
-
-
-    } else if (req.method === 'POST' && req.url === base + '/add') {
+    } else if (req.method === 'POST' && req.url === base) {
         req.on('data', (body) => {
             let data = JSON.parse(body);
             let user = new User(data.firstName, data.lastName, data.email, data.password);
@@ -47,7 +45,7 @@ http.createServer(((req, res) => {
             res.end('Successfully added');
         });
 
-    } else if (req.method === 'PUT' && req.url.startsWith('/api/v1/users/update')) {
+    } else if (req.method === 'PUT' && req.url === base) {
         req.on('data', (body) => {
             let data = JSON.parse(body);
             const success = fr.updateUser(data.ID, data.firstName, data.lastName, data.email, data.password);
@@ -58,7 +56,7 @@ http.createServer(((req, res) => {
             }
         });
 
-    } else if (req.method === 'DELETE' && req.url.startsWith('/api/v1/users/delete')) {
+    } else if (req.method === 'DELETE' && req.url===base) {
         let id = req.url.split('/').slice(-1).pop();
         fr.removeById(id);
         res.end('Successfully deleted');
