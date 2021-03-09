@@ -88,8 +88,12 @@ router.get('/find/:desc', auth, async (req, res) => {
         if (!posts) {
             return res.status(404).send();
         }
-
+        
         const result = posts.filter((post) => post.description.includes(req.params.desc));
+        
+        if (result.length === 0) {
+            return res.status(404).send();
+        }        
         res.send(result);
     } catch (e) {
         res.status(500).send();
