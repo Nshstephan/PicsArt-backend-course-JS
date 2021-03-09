@@ -1,7 +1,7 @@
 # USER REGISTRATION AND THEIR POST"S CREATION USING REST API
 Node js rest api, using JWT auth, express, mongoDB (mongoose)
 
-Connect to DB then run index.js.
+#Connect to DB then run index.js.
 
 ## GuestUser Endpoints (without authorization)
 JS
