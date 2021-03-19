@@ -5,15 +5,13 @@ class EventEmitter {
         this.listeners
             .filter(({name}) => name === eventName)
             .forEach(
-                ({callback}) => setTimeout(
-                    callback.apply(this, [this, ...data]), 0));
+                ({callback}) => setTimeout(callback.apply(this, [this, ...data]), 0));
     }
 
     on(name, callback) {
-        if (
-            typeof callback === 'function'
-            && typeof name === 'string'
-        ) {
+        if (typeof callback === 'function'
+            && typeof name === 'string') {
+            
             this.listeners.push({name, callback});
         }
     }
