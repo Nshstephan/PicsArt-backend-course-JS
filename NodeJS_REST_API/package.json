@@ -4,7 +4,7 @@
   "description": "Node js rest api, using JWT auth, express, mongoDB (mongoose)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "Stepan Nshanyan",
